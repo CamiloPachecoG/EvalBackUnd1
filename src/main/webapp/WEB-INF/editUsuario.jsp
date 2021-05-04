@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Crear usuario</title>
+<title>Editar usuario</title>
 </head>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <body>
@@ -34,22 +34,23 @@
 	
 	<div class="container mt-5 justify-content-center col-md-5">
 		<h1>Editar usuario:</h1>
-		<form action="//usuarioAdd" method="POST">
+		<form:form action="/usuarioEdit/" method="POST" modelAttribute="usuario">
+			<form:hidden path="id" />
 			<div class="form-group">
-				<label for="nombre">Nombre: </label>
-				<input type="text" id="nombre" name="nombre" class="form-control">
+				<form:label path="nombre">Nombre: </form:label>
+				<form:input path="nombre" class="form-control" />
 			</div>
 			<div class="form-group">
-				<label for="apellido">Apellido: </label>
-				<input type="text" id="apellido" name="apellido" class="form-control">
+				<form:label path="apellido">Apellido: </form:label>
+				<form:input path="apellido" class="form-control" />
 			</div>
 			<div class"form-group">
-				<label for="edad">Edad: </label>
-				<input type="text" id="edad" name="edad" class="form-control">
+				<form:label path="edad">Edad: </form:label>
+				<form:input path="edad" class="form-control" />
 			</div>
 			
-			<button class="btn btn-block btn-outline-primary mt-4" type="submit">Editar</button>			
-		</form>
+			<button class="btn btn-block btn-outline-primary mt-4" type="submit">Actualizar</button>			
+		</form:form>
 			<a href="/listaUsuarios"><button class="btn btn-block btn-outline-primary mt-4" type="submit">Lista de usuarios</button></a>
 	</div>
 	

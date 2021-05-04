@@ -3,9 +3,12 @@ package com.everis.prueba1.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -78,18 +81,16 @@ public class UsuariosController {
 	public String editar(@PathVariable("id") Long id, Model model) {
 		Optional<Usuario> usuario = usuarioService.buscarPorId(id);
 		model.addAttribute("usuario", usuario);
-		return "usuario.jsp";
+		return "editUsuario.jsp";
 	}
 	
-	/*
-	@RequestMapping("/usuarioEdit")
-	public ModelAndView usuarioEdit(@ModelAttribute("usuario") Usuario usuario) {
-		usuarioService.guardarUsuario(usuario);
-		return new ModelAndView("redirect:/listaUsuarios"); 
-	}
-	*/
 	
-
+	@RequestMapping("/usuarioEdit/")
+	public String usuarioEdit(@Valid @ModelAttribute("usuario") Usuario usuario) {
+		usuario = usuarioService.actualizarUsuario(usuario);
+		return "redirect:/listaUsuarios"; 
+	}
+	
 	
 	@RequestMapping("/usuario/{id}")
 	public ModelAndView eliminarUsuario(@PathVariable("id") Long id){

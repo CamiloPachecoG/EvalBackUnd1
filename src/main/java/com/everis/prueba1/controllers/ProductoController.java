@@ -1,10 +1,14 @@
 package com.everis.prueba1.controllers;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,6 +71,19 @@ public class ProductoController {
 		List<Producto> listaProductos = productoService.allProductos();
 		
 		return new ModelAndView("listaProducto.jsp", "listaProductos", listaProductos);
+	}
+	
+	@RequestMapping("/editProducto/{id}")
+	public String editar(@PathVariable("id") Long id, Model model) {
+		Optional<Producto> producto = productoService.buscarPorId(id);
+		model.addAttribute("producto", producto);
+		return "editProducto.jsp";
+	}
+	
+	@RequestMapping("/productoEdit")
+	public String productoEdit(@Valid @ModelAttribute("producto") Producto producto) {
+		producto = productoService.actualizarProducto(producto);
+		return "redirect:/listaProductos";
 	}
 	
 	@RequestMapping("/producto/{id}")

@@ -3,6 +3,8 @@ package com.everis.prueba1.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,10 @@ public class UsuarioService {
 	
 	public Optional<Usuario> buscarPorId(Long id){
 		return usuarioRepository.findById(id);
+	}
+	
+	public Usuario actualizarUsuario(@Valid Usuario usuario) {
+		return usuarioRepository.save(usuario);
 	}
 	
 	
